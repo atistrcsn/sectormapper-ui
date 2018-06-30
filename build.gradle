@@ -1,0 +1,48 @@
+plugins {
+    id "io.spring.dependency-management" version "1.0.5.RELEASE"
+}
+
+ext {
+    vaadinVersion = '8.4.4'
+}
+
+allprojects {
+    apply plugin: 'idea'
+    idea {
+        module {
+            outputDir file('build/classes/main')
+            testOutputDir file('build/classes/test')
+        }
+    }
+    if (project.convention.findPlugin(JavaPluginConvention)) {
+        // Change the output directory for the main and test source sets back to the old path
+        sourceSets.main.output.classesDir = new File(buildDir, "classes/main")
+        sourceSets.test.output.classesDir = new File(buildDir, "classes/test")
+    }
+
+    group = 'io.github.atistrcsn'
+    version = '0.1.0-SNAPSHOT'
+
+    configurations.all {
+        resolutionStrategy.cacheDynamicVersionsFor 0, 'hours'
+        resolutionStrategy.cacheChangingModulesFor 0, 'hours'
+    }
+}
+
+subprojects {
+    apply plugin: 'io.spring.dependency-management'
+
+    repositories {
+        mavenCentral()
+    }
+
+    dependencyManagement {
+        imports {
+            mavenBom "com.vaadin:vaadin-bom:${vaadinVersion}"
+        }
+    }
+}
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '4.5.1'
+}

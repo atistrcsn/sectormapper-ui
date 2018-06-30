@@ -1,0 +1,2 @@
+rootProject.name = 'sectormapper-ui'
+include ':demo', ':library'
