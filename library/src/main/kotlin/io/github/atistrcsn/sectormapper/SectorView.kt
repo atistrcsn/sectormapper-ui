@@ -4,11 +4,11 @@ import com.vaadin.ui.CustomLayout
 import com.vaadin.ui.JavaScript
 import mu.KotlinLogging
 
-class Sector(val id: Int,
-             private val posX: Int,
-             private val posY: Int,
-             val sectorLevel: SectorLevel,
-             private val title: String?) {
+class SectorView(val id: Int,
+                 private val posX: Int,
+                 private val posY: Int,
+                 val sectorLevel: SectorLevel,
+                 private val title: String?) {
 
     private val prefix = "sector"
     private val cssId = "$prefix-$id-data"

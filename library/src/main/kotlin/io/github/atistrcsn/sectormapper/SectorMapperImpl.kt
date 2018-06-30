@@ -12,28 +12,29 @@ import kotlin.collections.LinkedHashMap
 
 interface SectorMapper {
     fun init()
-    fun addSector(sector: Sector)
-    fun getSector(id: Int): Optional<Sector>
+    fun addSector(sector: SectorView): SectorView
+    fun getSector(id: Int): Optional<SectorView>
 }
 
 class SectorMapperImpl(private val config: Config) : SectorMapper {
 
-    private val secMap = LinkedHashMap<Int, Sector>()
+    private val secMap = LinkedHashMap<Int, SectorView>()
     private lateinit var sectorContainer: AbsoluteLayout
 
     override fun init() {
         RootComponent(config).let { UI.getCurrent().content = it }
     }
 
-    override fun addSector(sector: Sector) {
+    override fun addSector(sector: SectorView): SectorView {
         sector.config = config
         secMap.putIfAbsent(sector.id, sector)?.let { previous ->
             sectorContainer.removeComponent(previous.component)
         }
         sectorContainer.addComponent(sector.component)
+        return sector
     }
 
-    override fun getSector(id: Int): Optional<Sector> {
+    override fun getSector(id: Int): Optional<SectorView> {
         return Optional.ofNullable(secMap[id])
     }
 
