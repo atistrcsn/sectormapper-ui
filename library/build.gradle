@@ -1,5 +1,6 @@
 plugins {
     id 'org.jetbrains.kotlin.jvm' version '1.2.50'
+    id "com.jfrog.artifactory" version "4.7.4"
 }
 
 apply plugin: 'io.spring.dependency-management'
@@ -25,12 +26,38 @@ publishing {
     }
 }
 
+artifactory {
+    contextUrl = artifactory_contextUrl
+    publish {
+        contextUrl = artifactory_contextUrl
+        repository {
+            repoKey = 'maven-dev'
+            username = artifactory_user
+            password = artifactory_password
+        }
+        defaults {
+            publications('mavenJava')
+        }
+    }
+    clientConfig.info.setBuildNumber('' + new Random(System.currentTimeMillis()).nextInt(20000))
+}
+
 task cleanPubLocal(group: 'build') {
     dependsOn 'clean'
     dependsOn 'assemble'
     dependsOn 'publishToMavenLocal'
     tasks.findByName('assemble').mustRunAfter 'clean'
     tasks.findByName('publishToMavenLocal').mustRunAfter 'assemble'
+}
+
+task cleanPubArtifactory(group: 'build') {
+    dependsOn 'clean'
+    dependsOn 'build'
+    dependsOn 'publishToMavenLocal'
+    dependsOn 'artifactoryPublish'
+    tasks.findByName('build').mustRunAfter 'clean'
+    tasks.findByName('publishToMavenLocal').mustRunAfter 'build'
+    tasks.findByName('artifactoryPublish').mustRunAfter 'publishToMavenLocal'
 }
 
 compileKotlin {
