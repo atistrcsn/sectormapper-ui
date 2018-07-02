@@ -19,5 +19,7 @@ class Config(
          */
         val overlaySectorIdPrefix: String
 
-
-)
+) {
+    @JvmField
+    var isDevelopment: Boolean = false
+}

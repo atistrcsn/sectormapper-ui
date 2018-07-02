@@ -1,49 +1,41 @@
 package io.github.atistrcsn.sectormapper
 
-import com.vaadin.ui.CustomLayout
+import com.vaadin.shared.ui.ContentMode
 import com.vaadin.ui.JavaScript
+import com.vaadin.ui.Label
+import com.vaadin.ui.UI
 import mu.KotlinLogging
 
 class SectorView(val id: Int,
                  private val posX: Int,
                  private val posY: Int,
                  val sectorLevel: SectorLevel,
-                 private val title: String?) {
+                 val title: String?) {
 
     private val prefix = "sector"
     private val cssId = "$prefix-$id-data"
     private val overlaySelector get() = "#${config.overlaySectorIdPrefix}$id"
     internal lateinit var config: Config
 
-    internal val component = CustomLayout().apply {
+    internal val component = Label().apply {
         id = cssId; primaryStyleName = prefix
         setSizeUndefined()
         setSectorPosition("#$cssId", posX, posY)
-        addContextClickListener {
-            SectorLevel.LEVEL2.svgStyle(overlaySelector).forEach { it.exec() }
-        }
+        contentMode = ContentMode.HTML
     }
 
-    fun updateData(seatsAvailable: Int, seatsConnected: Int, sectorLevel: SectorLevel) {
-        component.styleName = "$sectorLevel"
-        component.templateContents = """
+    fun updateData(seatsAvailable: Int, seatsConnected: Int, sectorLevel: SectorLevel): SectorView {
+        UI.getCurrent().accessSynchronously {
+            component.styleName = "$sectorLevel"
+            component.value = """
             <div class='title'>$title</div>
             <div class='seats'>
                 <span class='available'>$seatsAvailable</span><span class='connected'>$seatsConnected</span>
             </div>
             """.trimIndent()
-        toggleFontShade(true)
-        sectorLevel.svgStyle(overlaySelector).forEach { it.exec() }
-    }
-
-    private fun toggleFontShade(isDark: Boolean) {
-        component.apply {
-            if (isDark) {
-                removeStyleName("lightFont"); addStyleName("darkFont")
-            } else {
-                removeStyleName("darkFont"); addStyleName("lightFont")
-            }
+            sectorLevel.svgStyle(overlaySelector).forEach { it.exec() }
         }
+        return this
     }
 
     private fun setSvgAttr(sectorId: Int, vararg styles: KV) {

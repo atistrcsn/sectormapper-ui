@@ -1,38 +1,51 @@
 .sector {
-    font-family: "Arial-BoldMT", "Open Sans", "Helvetica Neue", sans-serif;
+    font-family: "Arial", "Arial-BoldMT", "Open Sans", "Helvetica Neue", sans-serif;
     font-weight: 900;
-    width: 167px;
+    width: 240px;
     background: rgba(126, 211, 33, 0.70);
     box-shadow: 2px 4px 4px 0 rgba(9, 30, 66, 0.36), inset 0 0 0 5px #ffffff;
     border-radius: 5px;
 }
 
+.sector.LEVEL1 {
+    background-color: #FFAB00;
+}
+
+.sector.LEVEL2 {
+    background-color: #ff7e61;
+}
+
+.sector.LEVEL3 {
+    background-color: #EB0000;
+}
+
 .sector .title {
-    background: rgba(37, 56, 88, 0.70);
+    background: rgba(37, 56, 88, 0.50);
     border: 5px solid #FFFFFF;
     border-radius: 5px 5px 0 0;
     font-weight: 800;
-    font-size: 30px;
+    font-size: 50px;
     color: #EBECF0;
     text-align: center;
-    line-height: 46px;
+    line-height: 76px;
 }
 
 .sector .seats {
-    font-family:  inherit;
-    font-size: 46px;
+    font-family: inherit;
+    font-size: 60px;
     text-align: center;
-    line-height: 100px;
+    line-height: 120px;
 }
 
 .sector .seats span {
 }
 
 .sector .seats .available {
-    color: #0052CC;
-    margin-right: 8px;
+    color: #000;
+    margin-right: 10px;
+    font-size: 66px;
 }
 
 .sector .seats .connected {
-    color: #D0021B;
+    color: #fff;
 }

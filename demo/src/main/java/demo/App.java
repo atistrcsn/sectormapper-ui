@@ -1,5 +1,6 @@
 package demo;
 
+import com.vaadin.spring.annotation.UIScope;
 import io.github.atistrcsn.sectormapper.Config;
 import io.github.atistrcsn.sectormapper.SectorMapper;
 import io.github.atistrcsn.sectormapper.SectorMapperImpl;
@@ -14,14 +15,17 @@ public class App {
 
     @Bean
     public Config getConfig() {
-        return new Config(
+        Config cfg = new Config(
                 null,
                 new File(getClass().getResource("/map.svg").getPath()),
                 "sector-overlay-"
         );
+        cfg.isDevelopment = true;
+        return cfg;
     }
 
     @Bean
+    @UIScope
     public SectorMapper getMapper() {
         return new SectorMapperImpl(getConfig());
     }
