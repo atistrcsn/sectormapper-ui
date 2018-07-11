@@ -1,5 +1,76 @@
+/*---------------------------------------------------------------------------*
+ * SF UI Display
+ *---------------------------------------------------------------------------*/
+
+/** Black */
+@font-face {
+    font-family: "SF Display";
+    font-weight: 900;
+    src: url("/VAADIN/SF-UI-Display-Black.otf");
+}
+
+/** Bold */
+@font-face {
+    font-family: "SF Display";
+    font-weight: 700;
+    src: url("/VAADIN/SF-UI-Display-Bold.otf");
+}
+
+/** Heavy */
+@font-face {
+    font-family: "SF Display";
+    font-weight: 800;
+    src: url("/VAADIN/SF-UI-Display-Heavy.otf");
+}
+
+/** Light */
+@font-face {
+    font-family: "SF Display";
+    font-weight: 200;
+    src: url("/VAADIN/SF-UI-Display-Light.otf");
+}
+
+/** Medium */
+@font-face {
+    font-family: "SF Display";
+    font-weight: 500;
+    src: url("/VAADIN/SF-UI-Display-Medium.otf");
+}
+
+/** Regular */
+@font-face {
+    font-family: "SF Display";
+    font-weight: 400;
+    src: url("/VAADIN/SF-UI-Display-Regular.otf");
+}
+
+/** Semibold */
+@font-face {
+    font-family: "SF Display";
+    font-weight: 600;
+    src: url("/VAADIN/SF-UI-Display-Semibold.otf");
+}
+
+/** Thin */
+@font-face {
+    font-family: "SF Display";
+    font-weight: 300;
+    src: url("/VAADIN/SF-UI-Display-Thin.otf");
+}
+
+/** Ultralight */
+@font-face {
+    font-family: "SF Display";
+    font-weight: 100;
+    src: url("/VAADIN/SF-UI-Display-Ultralight.otf");
+}
+
+tspan {
+    font-family: "SF Display", sans-serif;
+}
+
 .sector {
-    font-family: "Arial", "Arial-BoldMT", "Open Sans", "Helvetica Neue", sans-serif;
+    font-family: "SF Display", sans-serif;
     font-weight: 900;
     width: 240px;
     background: rgba(126, 211, 33, 0.70);
@@ -23,7 +94,7 @@
     background: rgba(37, 56, 88, 0.50);
     border: 5px solid #FFFFFF;
     border-radius: 5px 5px 0 0;
-    font-weight: 800;
+    font-weight: 400;
     font-size: 50px;
     color: #EBECF0;
     text-align: center;
@@ -48,4 +119,5 @@
 
 .sector .seats .connected {
     color: #fff;
+    font-weight: 700;
 }

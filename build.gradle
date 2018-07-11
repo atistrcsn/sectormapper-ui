@@ -21,7 +21,7 @@ allprojects {
     }
 
     group = 'io.github.atistrcsn'
-    version = '0.2.0'
+    version = '0.2.1'
 
     configurations.all {
         resolutionStrategy.cacheDynamicVersionsFor 0, 'hours'
